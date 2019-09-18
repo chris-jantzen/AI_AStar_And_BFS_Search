@@ -1,16 +1,3 @@
-class PriorityQueueIterator:
-    def __init__(self, queue):
-        self._queue = queue
-        self._index = 0
-
-    def __next__(self):
-        if self._index < len(self._queue.queue):
-            result = self._queue.queue[self._index]
-            self._index += 1
-            return result
-        raise StopIteration
-
-
 class PriorityQueue(object):
     def __init__(self):
         self.queue = []
@@ -44,6 +31,20 @@ class PriorityQueue(object):
             exit()
 
 
+class PriorityQueueIterator:
+    def __init__(self, queue):
+        self._queue = queue
+        self._index = 0
+
+    def __next__(self):
+        if self._index < len(self._queue.queue):
+            result = self._queue.queue[self._index]
+            self._index += 1
+            return result
+        raise StopIteration
+
+
+# Test Code
 # prio = PriorityQueue()
 # prio.insert(1)
 # prio.insert(10)

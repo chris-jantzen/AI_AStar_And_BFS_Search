@@ -7,6 +7,3 @@ closed_list = []  # List of states that have been expanded
 
 def bfs(start_state, goal_state):
     open_list.insert(start_state)
-    open_list.insert(goal_state)
-    for i in open_list:
-        print(i)
