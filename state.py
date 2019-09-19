@@ -8,6 +8,7 @@ class State:
         self.parent_stateid = parent_stateid
         self.gn = gn
         self.hn = hn
+        self.fn = gn + hn
 
     def __str__(self):
         return '{}'.format(self.state)
