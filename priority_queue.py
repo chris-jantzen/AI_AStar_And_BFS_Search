@@ -3,7 +3,7 @@ class PriorityQueue(object):
         self.queue = []
 
     def __str__(self):
-        return ' '.join([str(i) for i in self.queue])
+        return ' '.join([str(i.getState()) for i in self.queue])
 
     def __iter__(self):
         return PriorityQueueIterator(self)
@@ -17,11 +17,11 @@ class PriorityQueue(object):
         self.queue.append(data)
 
     # for popping an element based on Priority
-    def delete(self):
+    def pop(self):
         try:
             max = 0
             for i in range(len(self.queue)):
-                if self.queue[i] > self.queue[max]:
+                if self.queue[i].gn > self.queue[max].gn:
                     max = i
             item = self.queue[max]
             del self.queue[max]
