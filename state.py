@@ -1,8 +1,5 @@
-from priority_queue import PriorityQueue
-
-
 class State:
-    def __init__(self, state, stateid, parent_stateid, gn, hn):
+    def __init__(self, state, stateid, parent_stateid, gn, hn=0):
         self.state = state
         self.stateid = stateid
         self.parent_stateid = parent_stateid
@@ -43,6 +40,7 @@ class State:
         return self.state
 
 
+# from priority_queue import PriorityQueue
 # node = State([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
 #               11, 12, 13, 14, 15, 16, 17, 18, 19], 1, 0)
 # node2 = State([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
