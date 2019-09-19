@@ -1,11 +1,11 @@
 class State:
-    def __init__(self, state, stateid, parent_stateid, gn, hn=0):
+    def __init__(self, state, stateid, parent_stateid, gn):
         self.state = state
         self.stateid = stateid
         self.parent_stateid = parent_stateid
         self.gn = gn
-        self.hn = hn
-        self.fn = gn + hn
+        # self.hn = hn
+        # self.fn = gn + hn
 
     def __str__(self):
         return '{}'.format(self.state)
