@@ -19,12 +19,12 @@ class PriorityQueue(object):
     # for popping an element based on Priority
     def pop(self):
         try:
-            max = 0
+            min = 0
             for i in range(len(self.queue)):
-                if self.queue[i].gn > self.queue[max].gn:
-                    max = i
-            item = self.queue[max]
-            del self.queue[max]
+                if self.queue[i].fn < self.queue[min].fn:
+                    min = i
+            item = self.queue[min]
+            del self.queue[min]
             return item
         except IndexError:
             print()
@@ -45,17 +45,18 @@ class PriorityQueueIterator:
 
 
 # Test Code
+# from state import State
 # prio = PriorityQueue()
-# prio.insert(1)
-# prio.insert(10)
-# prio.insert(5)
-# prio.insert(100)
-# prio.insert(15)
-# prio.insert(102)
-# prio.insert(3)
+# node1 = State([5, 15, 7, 8, 9, 11, 10, 3, 12, 0,
+#                2, 13, 4, 14, 1, 6, 16, 17, 18, 19], 1, 0, 2)
+# node2 = State([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
+#                12, 13, 14, 15, 16, 17, 18, 19], 1, 0, 3)
+
+# prio.insert(node1)
+# prio.insert(node2)
 
 # print(prio)
-# item = prio.delete()
+# item = prio.pop()
 # print(prio)
 
 # print(item)
