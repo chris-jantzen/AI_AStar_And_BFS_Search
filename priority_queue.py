@@ -8,15 +8,12 @@ class PriorityQueue(object):
     def __iter__(self):
         return PriorityQueueIterator(self)
 
-    # for checking if the queue is empty
     def isEmpty(self):
         return len(self.queue) == []
 
-    # for inserting an element in the queue
     def insert(self, data):
         self.queue.append(data)
 
-    # for popping an element based on Priority
     def pop(self):
         try:
             min = 0
