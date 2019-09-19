@@ -46,7 +46,7 @@ class BFS(Search):
                     node.stateid,
                     node.gn + 1)
             )
-            id_count += 1
+            self.id_count += 1
         if zero_index - 1 >= 0:
             newNodes.append(
                 State(
@@ -57,7 +57,7 @@ class BFS(Search):
                     node.gn + 1
                 )
             )
-            id_count += 1
+            self.id_count += 1
         if zero_index + 1 <= len(node.getState()):
             newNodes.append(
                 State(
