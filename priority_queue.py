@@ -18,7 +18,8 @@ class PriorityQueue(object):
         try:
             min = 0
             for i in range(len(self.queue)):
-                if self.queue[i].fn < self.queue[min].fn:
+                # TODO figure out how to get fn here
+                if self.queue[i].gn < self.queue[min].gn:
                     min = i
             item = self.queue[min]
             del self.queue[min]

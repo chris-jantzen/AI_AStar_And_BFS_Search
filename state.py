@@ -4,7 +4,7 @@ class State:
         self.stateid = stateid
         self.parent_stateid = parent_stateid
         self.gn = gn
-        # self.hn = hn
+        # self.hn = self.calculateHn()
         # self.fn = gn + hn
 
     def __str__(self):
