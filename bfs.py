@@ -19,14 +19,9 @@ class BFS(Search):
             if node.isGoalState(self.goal_state):
                 print('goal state')
                 return
+            # Expands node and inserts all non-duplicates into open list
             self.expandNode(node)
-            return
-
-            # TODO:
-            # Expand the node here
-            # Then add it to the closed list
-            # Implement a way to compare it to things in the closed list,
-            # which will basically just be like doing the goal state check.
+            self.closed_list.append(node)
 
     def getOpenListNode(self):
         return self.open_list.pop()
@@ -80,3 +75,23 @@ class BFS(Search):
                 )
             )
             self.id_count += 1
+
+        newNodes = self.checkForDuplicates(newNodes)
+        for i in newNodes:
+            self.open_list.insert(i)
+
+    def checkForDuplicates(self, nodes):
+        to_pop = []
+        for i in nodes:
+            for j in self.open_list:
+                if i.getState() == j.getState():
+                    to_pop.append(i)
+                    break
+            for k in self.closed_list:
+                if i.getState() == k.getState():
+                    to_pop.append(i)
+                    break
+            index += 1
+        for item in to_pop:
+            nodes.remove(item)
+        return nodes
