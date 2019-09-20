@@ -1,7 +1,6 @@
 from state import State
 from priority_queue import PriorityQueue
 from search import Search
-from utils import swapPositions
 
 
 class BFS(Search):
@@ -39,8 +38,8 @@ class BFS(Search):
         if zero_index - 4 >= 0:
             newNodes.append(
                 State(
-                    swapPositions(node.getState().copy(),
-                                  zero_index, zero_index-4),
+                    self.swapPositions(node.getState().copy(),
+                                       zero_index, zero_index-4),
                     self.id_count,
                     node.stateid,
                     node.gn + 1)
@@ -49,8 +48,8 @@ class BFS(Search):
         if zero_index not in left_no_moves and zero_index - 1 >= 0:
             newNodes.append(
                 State(
-                    swapPositions(node.getState().copy(),
-                                  zero_index, zero_index-1),
+                    self.swapPositions(node.getState().copy(),
+                                       zero_index, zero_index-1),
                     self.id_count,
                     node.stateid,
                     node.gn + 1
@@ -60,8 +59,8 @@ class BFS(Search):
         if zero_index not in right_no_moves and zero_index + 1 <= len(node.getState()):
             newNodes.append(
                 State(
-                    swapPositions(node.getState().copy(),
-                                  zero_index, zero_index+1),
+                    self.swapPositions(node.getState().copy(),
+                                       zero_index, zero_index+1),
                     self.id_count,
                     node.stateid,
                     node.gm + 1
@@ -71,8 +70,8 @@ class BFS(Search):
         if zero_index + 4 <= len(node.getState()):
             newNodes.append(
                 State(
-                    swapPositions(node.getState().copy(),
-                                  zero_index, zero_index+4),
+                    self.swapPositions(node.getState().copy(),
+                                       zero_index, zero_index+4),
                     self.id_count,
                     node.stateid,
                     node.gm + 1
