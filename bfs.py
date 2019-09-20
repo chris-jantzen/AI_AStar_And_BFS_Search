@@ -30,6 +30,10 @@ class BFS(Search):
         # TODO: Make a check for side, top, bottom cases to make sure that I don't
         # loop around the side in moves
         zero_index = node.state.index(0)
+        # Indexes where a zero would be on the edge of a board and would have no tile
+        # to the left or right to move into its spot
+        left_no_moves = [4, 8, 12, 16]
+        right_no_moves = [3, 7, 11, 15]
         newNodes = []
         # TODO: Abstract this into another function
         if zero_index - 4 >= 0:
@@ -42,7 +46,7 @@ class BFS(Search):
                     node.gn + 1)
             )
             self.id_count += 1
-        if zero_index - 1 >= 0:
+        if zero_index not in left_no_moves and zero_index - 1 >= 0:
             newNodes.append(
                 State(
                     swapPositions(node.getState().copy(),
@@ -53,7 +57,7 @@ class BFS(Search):
                 )
             )
             self.id_count += 1
-        if zero_index + 1 <= len(node.getState()):
+        if zero_index not in right_no_moves and zero_index + 1 <= len(node.getState()):
             newNodes.append(
                 State(
                     swapPositions(node.getState().copy(),
