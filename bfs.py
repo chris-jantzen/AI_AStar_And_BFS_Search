@@ -10,14 +10,16 @@ class BFS(Search):
         self.closed_list = []
 
     def breadthFirstSearch(self, start_state):
-        found_goal_state = False
+        # found_goal_state = False
         self.id_count = 1
         self.open_list.insert(start_state)
-        while not found_goal_state:
+        while True:
             node = self.getOpenListNode()
             if node.isGoalState(self.goal_state):
                 print('goal state')
                 return
+            else:
+                print('not goal state')
             # Expands node and inserts all non-duplicates into open list
             self.expandNode(node)
             self.closed_list.append(node)
@@ -26,8 +28,6 @@ class BFS(Search):
         return self.open_list.pop()
 
     def expandNode(self, node):
-        # TODO: Make a check for side, top, bottom cases to make sure that I don't
-        # loop around the side in moves
         zero_index = node.state.index(0)
         # Indexes where a zero would be on the edge of a board and would have no tile
         # to the left or right to move into its spot
@@ -63,7 +63,7 @@ class BFS(Search):
                                        zero_index, zero_index+1),
                     self.id_count,
                     node.stateid,
-                    node.gm + 1
+                    node.gn + 1
                 )
             )
             self.id_count += 1
@@ -74,7 +74,7 @@ class BFS(Search):
                                        zero_index, zero_index+4),
                     self.id_count,
                     node.stateid,
-                    node.gm + 1
+                    node.gn + 1
                 )
             )
             self.id_count += 1
@@ -94,7 +94,6 @@ class BFS(Search):
                 if i.getState() == k.getState():
                     to_pop.append(i)
                     break
-            index += 1
         for item in to_pop:
             nodes.remove(item)
         return nodes
