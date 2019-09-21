@@ -3,7 +3,7 @@ from state import State
 
 
 class Search:
-    def __init__(self, goal_state):
+    def __init__(self, goal_state, search_type='bfs'):
         self.goal_state = goal_state
         self.open_list = PriorityQueue()
         self.closed_list = []
@@ -11,6 +11,7 @@ class Search:
         self._open_list_pop_count = 0
         self._open_list_add_count = 0
         self._closed_list_add_count = 0
+        self.search_type = search_type
 
     def swapPositions(self, lst, pos1, pos2):
         lst[pos1], lst[pos2] = lst[pos2], lst[pos1]
@@ -59,45 +60,70 @@ class Search:
         newNodes = []
         # TODO: Abstract this into another function
         if zero_index - 4 >= 0:
+            if node.state[zero_index - 4] >= 10:
+                cost = 2
+            else:
+                cost = 1
             newNodes.append(
                 State(
                     self.swapPositions(node.state.copy(),
-                                       zero_index, zero_index-4),
+                                       zero_index, zero_index - 4),
                     self.id_count,
                     node.stateid,
-                    node.gn + 1)
+                    node.gn + cost,
+                    self.goal_state,
+                    self.search_type
+                )
             )
             self.id_count += 1
         if zero_index not in left_no_moves and zero_index - 1 >= 0:
+            if node.state[zero_index - 1] >= 10:
+                cost = 2
+            else:
+                cost = 1
             newNodes.append(
                 State(
                     self.swapPositions(node.state.copy(),
-                                       zero_index, zero_index-1),
+                                       zero_index, zero_index - 1),
                     self.id_count,
                     node.stateid,
-                    node.gn + 1
+                    node.gn + cost,
+                    self.goal_state,
+                    self.search_type
                 )
             )
             self.id_count += 1
         if zero_index not in right_no_moves and zero_index + 1 < len(node.state):
+            if node.state[zero_index + 1] >= 10:
+                cost = 2
+            else:
+                cost = 1
             newNodes.append(
                 State(
                     self.swapPositions(node.state.copy(),
-                                       zero_index, zero_index+1),
+                                       zero_index, zero_index + 1),
                     self.id_count,
                     node.stateid,
-                    node.gn + 1
+                    node.gn + cost,
+                    self.goal_state,
+                    self.search_type
                 )
             )
             self.id_count += 1
         if zero_index + 4 < len(node.state):
+            if node.state[zero_index + 4] >= 10:
+                cost = 2
+            else:
+                cost = 1
             newNodes.append(
                 State(
                     self.swapPositions(node.state.copy(),
-                                       zero_index, zero_index+4),
+                                       zero_index, zero_index + 4),
                     self.id_count,
                     node.stateid,
-                    node.gn + 1
+                    node.gn + cost,
+                    self.goal_state,
+                    self.search_type
                 )
             )
             self.id_count += 1

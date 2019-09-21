@@ -1,11 +1,11 @@
 class State:
-    def __init__(self, state, stateid, parent_stateid, gn):
+    def __init__(self, state, stateid, parent_stateid, gn, goal_state, search_type='bfs'):
         self.state = state
         self.stateid = stateid
         self.parent_stateid = parent_stateid
         self.gn = gn
-        # self.hn = self.calculateHn()
-        # self.fn = gn + hn
+        self.hn = self.calculateHeuristic(goal_state, search_type)
+        self.fn = self.hn + self.gn
 
     def __str__(self):
         return '{}'.format(self.state)
@@ -36,6 +36,28 @@ class State:
                 return False
         return True
 
+    def calculateHeuristic(self, goal_state, kind='bfs'):
+        heuristic = 0
+        if kind == 'h1':
+            for state_index in range(len(self.state)):
+                if self.state[state_index] != goal_state[state_index]:
+                    heuristic += 1
+        elif kind == 'h2':
+            heuristic = self.calculateManhanttanDistance(
+                self.state, goal_state)
+
+        return heuristic
+
+    def calculateManhanttanDistance(self, state, goal):
+        hn = 0
+        for state_index, state_val in enumerate(state):
+            if state_val != 0:
+                goal_index = goal.index(state_val)
+                hn += self.steps(state_index, goal_index)
+        return hn
+
+    def steps(self, state_location, goal_location):
+        return abs(state_location // 4 - goal_location // 4) + abs(state_location % 4 - goal_location % 4)
 
 # from priority_queue import PriorityQueue
 # node = State([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,

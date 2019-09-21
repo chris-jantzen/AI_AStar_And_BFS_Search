@@ -10,11 +10,14 @@ def main(start_state, goal_state):
 
 
 if __name__ == "__main__":
+    # TODO: Read in states from command line call
+    start_state = [1, 0, 3, 4, 5, 2, 7, 8, 9, 6, 15, 11,
+                   13, 10, 14, 12, 16, 17, 18, 19]
+    goal_state = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
+                  13, 14, 15, 0, 16, 17, 18, 19]
     main(
-        State([1, 0, 3, 4, 5, 2, 7, 8, 9, 6, 15, 11,
-               13, 10, 14, 12, 16, 17, 18, 19], 1, 0, 0),
-        State([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
-               13, 14, 15, 0, 16, 17, 18, 19], 0, 0, 0)
+        State(start_state, 1, 0, 0, goal_state),
+        State(goal_state, 0, 0, 0, goal_state)
     )
 
 # Simple State Test Case
