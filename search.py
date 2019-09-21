@@ -8,6 +8,9 @@ class Search:
         self.open_list = PriorityQueue()
         self.closed_list = []
         self.id_count = 1
+        self._open_list_pop_count = 0
+        self._open_list_add_count = 0
+        self._closed_list_add_count = 0
 
     def swapPositions(self, lst, pos1, pos2):
         lst[pos1], lst[pos2] = lst[pos2], lst[pos1]
@@ -29,6 +32,7 @@ class Search:
         return path
 
     def getOpenListNode(self):
+        self._open_list_pop_count += 1
         return self.open_list.pop()
 
     def checkForDuplicates(self, nodes):
@@ -101,3 +105,4 @@ class Search:
         newNodes = self.checkForDuplicates(newNodes)
         for i in newNodes:
             self.open_list.insert(i)
+            self._open_list_add_count += 1
