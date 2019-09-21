@@ -12,14 +12,7 @@ class BFS(Search):
                 return
             if node.isGoalState(self.goal_state):
                 path = self.getPathTaken(node)
-                # for i in path:
-                #     print(i)
-                print('Length Of Path To Get To Goal: {}'.format(len(path)))
-                print('Nodes Pushed To Open List: {}'.format(
-                    self._open_list_add_count))
-                print('Nodes Pushed To Closed List: {}'.format(
-                    self._closed_list_add_count))
-                return
+                return self.returnResults(path)
 
             # Expands node and inserts all non-duplicates into open list
             self.expandNode(node)

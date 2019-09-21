@@ -106,3 +106,11 @@ class Search:
         for i in newNodes:
             self.open_list.insert(i)
             self._open_list_add_count += 1
+
+    def returnResults(self, path):
+        return (
+            'Length Of Path To Get To Goal: {}'.format(len(path)),
+            'Nodes Pushed To Open List: {}'.format(self._open_list_add_count),
+            'Nodes Pushed To Closed List: {}'.format(
+                self._closed_list_add_count)
+        )

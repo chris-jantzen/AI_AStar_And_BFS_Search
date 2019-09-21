@@ -4,7 +4,9 @@ from state import State
 
 def main(start_state, goal_state):
     breadth_first_search = BFS(goal_state)
-    breadth_first_search.breadthFirstSearch(start_state)
+    res = breadth_first_search.breadthFirstSearch(start_state)
+    for i in res:
+        print(i)
 
 
 if __name__ == "__main__":
