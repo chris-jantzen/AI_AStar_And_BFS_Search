@@ -31,9 +31,8 @@ class State:
             gs = goal_state.state
         else:
             gs = goal_state
-        for i in range(len(self.state)):
-            if self.state[i] != gs[i]:
-                return False
+        if self.state != gs:
+            return False
         return True
 
     def calculateHeuristic(self, goal_state, kind='bfs'):
@@ -45,7 +44,6 @@ class State:
         elif kind == 'h2':
             heuristic = self.calculateManhanttanDistance(
                 self.state, goal_state)
-
         return heuristic
 
     def calculateManhanttanDistance(self, state, goal):

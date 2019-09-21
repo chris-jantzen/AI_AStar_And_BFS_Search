@@ -1,23 +1,28 @@
 from bfs import BFS
+from astarsearch import AStar
 from state import State
 
 
 def main(start_state, goal_state):
-    breadth_first_search = BFS(goal_state)
-    res = breadth_first_search.breadthFirstSearch(start_state)
+    # breadth_first_search = BFS(goal_state)
+    # res = breadth_first_search.breadthFirstSearch(start_state)
+    # a_star_h1 = AStar(goal_state, 'h1')
+    # res = a_star_h1.aStar(start_state)
+    a_star_h2 = AStar(goal_state, 'h2')
+    res = a_star_h2.aStar(start_state)
     for i in res:
         print(i)
 
 
 if __name__ == "__main__":
     # TODO: Read in states from command line call
-    start_state = [1, 0, 3, 4, 5, 2, 7, 8, 9, 6, 15, 11,
-                   13, 10, 14, 12, 16, 17, 18, 19]
-    goal_state = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
-                  13, 14, 15, 0, 16, 17, 18, 19]
+    start_state_list = [1, 0, 3, 4, 5, 2, 7, 8, 9, 6, 15, 11,
+                        13, 10, 14, 12, 16, 17, 18, 19]
+    goal_state_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
+                       13, 14, 15, 0, 16, 17, 18, 19]
     main(
-        State(start_state, 1, 0, 0, goal_state),
-        State(goal_state, 0, 0, 0, goal_state)
+        State(start_state_list, 1, 0, 0, goal_state_list, 'h2'),
+        State(goal_state_list, 0, 0, 0, goal_state_list, 'h2')
     )
 
 # Simple State Test Case

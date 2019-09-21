@@ -71,7 +71,7 @@ class Search:
                     self.id_count,
                     node.stateid,
                     node.gn + cost,
-                    self.goal_state,
+                    self.goal_state.state,
                     self.search_type
                 )
             )
@@ -88,7 +88,7 @@ class Search:
                     self.id_count,
                     node.stateid,
                     node.gn + cost,
-                    self.goal_state,
+                    self.goal_state.state,
                     self.search_type
                 )
             )
@@ -105,7 +105,7 @@ class Search:
                     self.id_count,
                     node.stateid,
                     node.gn + cost,
-                    self.goal_state,
+                    self.goal_state.state,
                     self.search_type
                 )
             )
@@ -122,7 +122,7 @@ class Search:
                     self.id_count,
                     node.stateid,
                     node.gn + cost,
-                    self.goal_state,
+                    self.goal_state.state,
                     self.search_type
                 )
             )
