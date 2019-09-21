@@ -28,16 +28,13 @@ class State:
 
     def isGoalState(self, goal_state):
         if type(goal_state) == State:
-            gs = goal_state.getState()
+            gs = goal_state.state
         else:
             gs = goal_state
         for i in range(len(self.state)):
             if self.state[i] != gs[i]:
                 return False
         return True
-
-    def getState(self):
-        return self.state
 
 
 # from priority_queue import PriorityQueue
@@ -50,7 +47,7 @@ class State:
 # prio.insert(node)
 # prio.insert(node2)
 # for i in prio:
-#     print(i.getState())
+#     print(i.state())
 
 # node.printState()
 # if node.isGoalState([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,

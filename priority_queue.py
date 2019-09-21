@@ -3,7 +3,7 @@ class PriorityQueue(object):
         self.queue = []
 
     def __str__(self):
-        return ' '.join([str(i.getState()) for i in self.queue])
+        return ' '.join([str(i.state) for i in self.queue])
 
     def __iter__(self):
         return PriorityQueueIterator(self)

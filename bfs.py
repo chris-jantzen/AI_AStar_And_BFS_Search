@@ -10,16 +10,16 @@ class BFS(Search):
         self.closed_list = []
 
     def breadthFirstSearch(self, start_state):
-        # found_goal_state = False
         self.id_count = 1
         self.open_list.insert(start_state)
         while True:
             node = self.getOpenListNode()
             if node.isGoalState(self.goal_state):
-                print('goal state')
+                path = self.getPathTaken(node)
+                for i in path:
+                    print(i)
                 return
-            else:
-                print('not goal state')
+
             # Expands node and inserts all non-duplicates into open list
             self.expandNode(node)
             self.closed_list.append(node)
@@ -38,7 +38,7 @@ class BFS(Search):
         if zero_index - 4 >= 0:
             newNodes.append(
                 State(
-                    self.swapPositions(node.getState().copy(),
+                    self.swapPositions(node.state.copy(),
                                        zero_index, zero_index-4),
                     self.id_count,
                     node.stateid,
@@ -48,7 +48,7 @@ class BFS(Search):
         if zero_index not in left_no_moves and zero_index - 1 >= 0:
             newNodes.append(
                 State(
-                    self.swapPositions(node.getState().copy(),
+                    self.swapPositions(node.state.copy(),
                                        zero_index, zero_index-1),
                     self.id_count,
                     node.stateid,
@@ -56,10 +56,10 @@ class BFS(Search):
                 )
             )
             self.id_count += 1
-        if zero_index not in right_no_moves and zero_index + 1 <= len(node.getState()):
+        if zero_index not in right_no_moves and zero_index + 1 < len(node.state):
             newNodes.append(
                 State(
-                    self.swapPositions(node.getState().copy(),
+                    self.swapPositions(node.state.copy(),
                                        zero_index, zero_index+1),
                     self.id_count,
                     node.stateid,
@@ -67,10 +67,10 @@ class BFS(Search):
                 )
             )
             self.id_count += 1
-        if zero_index + 4 <= len(node.getState()):
+        if zero_index + 4 < len(node.state):
             newNodes.append(
                 State(
-                    self.swapPositions(node.getState().copy(),
+                    self.swapPositions(node.state.copy(),
                                        zero_index, zero_index+4),
                     self.id_count,
                     node.stateid,
@@ -87,11 +87,11 @@ class BFS(Search):
         to_pop = []
         for i in nodes:
             for j in self.open_list:
-                if i.getState() == j.getState():
+                if i.state == j.state:
                     to_pop.append(i)
                     break
             for k in self.closed_list:
-                if i.getState() == k.getState():
+                if i.state == k.state:
                     to_pop.append(i)
                     break
         for item in to_pop:
