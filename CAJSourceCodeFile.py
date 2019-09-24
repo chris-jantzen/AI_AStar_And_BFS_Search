@@ -3,6 +3,10 @@ from ast import literal_eval
 
 
 class Search:
+    """
+    Parent search class for encompassing all of the generic functionalities
+    of BFS and A* search.
+    """
     def __init__(self, goal_state, search_type="bfs"):
         self.goal_state = goal_state
         self.open_list = PriorityQueue()
@@ -18,6 +22,10 @@ class Search:
         return lst
 
     def getPathTaken(self, goal):
+        """
+        Backtracks through nodes using parentId to get how many steps were
+        needed to get to the goal state.
+        """
         path = [goal]
         node = goal
         found_original = False
@@ -39,6 +47,10 @@ class Search:
         return self.open_list.pop()
 
     def checkForDuplicates(self, nodes):
+        """
+        Checks for duplicates from the open or closed list before pushing new nodes to the
+        open list.
+        """
         to_pop = []
         for i in nodes:
             for k in self.closed_list:
