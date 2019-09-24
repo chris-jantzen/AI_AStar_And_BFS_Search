@@ -19,7 +19,7 @@ def main(start_state, goal_state, search_type):
         print("Usage: python3 'SearchType' '[StartState]' '[EndState]'")
         print(
             "Search type = bfs, h1, or h2 where h1 is A* with count of tiles in the wrong place, and h2 is A* with Manhattan Values"
-        )        
+        )
     for i in res:
         print(i)
 

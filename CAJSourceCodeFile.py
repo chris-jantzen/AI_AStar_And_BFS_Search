@@ -30,6 +30,8 @@ class Search:
                         found_original = True
                     break
         path.reverse()
+        for i in path:
+            i.printState()
         return path
 
     def getOpenListNode(self):
@@ -69,9 +71,9 @@ class BFS(Search):
             if self._open_list_pop_count < max_open_list_pops:
                 node = self.getOpenListNode()
             else:
-                return "After {} nodes popped from the open list, no solution has been found.".format(
+                return ("After {} nodes popped from the open list, no solution has been found.".format(
                     max_open_list_pops
-                )
+                ),)
             if node.isGoalState(self.goal_state):
                 path = self.getPathTaken(node)
                 return self.returnResults(path)
@@ -88,7 +90,6 @@ class BFS(Search):
         left_no_moves = [4, 8, 12, 16]
         right_no_moves = [3, 7, 11, 15]
         newNodes = []
-        # TODO: Abstract this into another function
         if zero_index - 4 >= 0:
             if node.state[zero_index - 4] >= 10:
                 cost = 2
@@ -172,9 +173,9 @@ class AStar(Search):
             if self._open_list_pop_count < max_open_list_pops:
                 node = self.getOpenListNode()
             else:
-                return "After {} nodes popped from the open list, no solution has been found.".format(
+                return ("After {} nodes popped from the open list, no solution has been found.".format(
                     max_open_list_pops
-                )
+                ),)
             if node.isGoalState(self.goal_state):
                 path = self.getPathTaken(node)
                 return self.returnResults(path)
@@ -288,20 +289,10 @@ class State:
         return "{}".format(self.state)
 
     def printState(self):
-        nl = 1
-        for i in range(len(self.state)):
-            if nl == 4:
-                if self.state[i] == 0:
-                    print(" ")
-                else:
-                    print(self.state[i])
-                nl = 1
-            else:
-                if self.state[i] == 0:
-                    print(" ", end=" ")
-                else:
-                    print(self.state[i], end=" ")
-                nl += 1
+        print('------------')
+        print('stateId={}\nparent stateId={}'.format(self.stateid, self.parent_stateid))
+        print('f(n)={}\ng(n)={}\nh(n)={}'.format(self.fn, self.gn, self.hn))
+        print(self.state)
 
     def isGoalState(self, goal_state):
         if type(goal_state) == State:
@@ -393,10 +384,11 @@ def main(start_state, goal_state, search_type):
         a_star_h2 = AStar(goal_state, search_type)
         res = a_star_h2.aStar(start_state)
     else:
-        print("Usage: python3 'SearchType' '[StartState]' '[EndState]'")
+        print("Usage: python3 'SearchType' '[StartState]' '[GoalState]'")
         print(
             "Search type = bfs, h1, or h2 where h1 is A* with count of tiles in the wrong place, and h2 is A* with Manhattan Values"
         )        
+
     for i in res:
         print(i)
 
