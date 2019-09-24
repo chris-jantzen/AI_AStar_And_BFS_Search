@@ -1,5 +1,4 @@
 from priority_queue import PriorityQueue
-from state import State
 
 
 class Search:
@@ -39,13 +38,16 @@ class Search:
     def checkForDuplicates(self, nodes):
         to_pop = []
         for i in nodes:
-            for j in self.open_list:
-                if i.state == j.state:
-                    to_pop.append(i)
-                    break
             for k in self.closed_list:
                 if i.state == k.state:
                     to_pop.append(i)
+                    break
+            for j in self.open_list:
+                if i.state == j.state:
+                    if i.priority > j.priority:
+                        self.open_list.remove(j)
+                    else:
+                        to_pop.append(i)
                     break
         for item in to_pop:
             nodes.remove(item)

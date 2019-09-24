@@ -11,8 +11,11 @@ class PriorityQueue(object):
     def isEmpty(self):
         return len(self.queue) == []
 
-    def insert(self, data):
-        self.queue.append(data)
+    def insert(self, node):
+        self.queue.append(node)
+
+    def remove(self, node):
+        self.queue.remove(node)
 
     def pop(self):
         try:
