@@ -3,7 +3,7 @@ class PriorityQueue(object):
         self.queue = []
 
     def __str__(self):
-        return ' '.join([str(i.state) for i in self.queue])
+        return " ".join([str(i.state) for i in self.queue])
 
     def __iter__(self):
         return PriorityQueueIterator(self)
@@ -18,7 +18,7 @@ class PriorityQueue(object):
         try:
             min = 0
             for i in range(len(self.queue)):
-                if self.queue[i].fn < self.queue[min].fn:
+                if self.queue[i].priority < self.queue[min].priority:
                     min = i
             item = self.queue[min]
             del self.queue[min]
@@ -39,24 +39,3 @@ class PriorityQueueIterator:
             self._index += 1
             return result
         raise StopIteration
-
-
-# Test Code
-# from state import State
-# prio = PriorityQueue()
-# node1 = State([5, 15, 7, 8, 9, 11, 10, 3, 12, 0,
-#                2, 13, 4, 14, 1, 6, 16, 17, 18, 19], 1, 0, 2)
-# node2 = State([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
-#                12, 13, 14, 15, 16, 17, 18, 19], 1, 0, 3)
-
-# prio.insert(node1)
-# prio.insert(node2)
-
-# print(prio)
-# item = prio.pop()
-# print(prio)
-
-# print(item)
-
-# for i in prio:
-#     print(i)
