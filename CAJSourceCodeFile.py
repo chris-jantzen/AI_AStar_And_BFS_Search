@@ -48,8 +48,8 @@ class Search:
 
     def checkForDuplicates(self, nodes):
         """
-        Checks for duplicates from the open or closed list before pushing new nodes to the
-        open list.
+        Checks for duplicates from the open or closed list
+        before pushing new nodes to the open list.
         """
         to_pop = []
         for i in nodes:
