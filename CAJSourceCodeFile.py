@@ -86,6 +86,7 @@ class BFS(Search):
                 return ("After {} nodes popped from the open list, no solution has been found.".format(
                     max_open_list_pops
                 ),)
+            # Check for goal state being met and build output results if so
             if node.isGoalState(self.goal_state):
                 path = self.getPathTaken(node)
                 return self.returnResults(path)
@@ -102,11 +103,14 @@ class BFS(Search):
         left_no_moves = [4, 8, 12, 16]
         right_no_moves = [3, 7, 11, 15]
         newNodes = []
+        # Checks for being out of range. Same for each of the below ifs.
         if zero_index - 4 >= 0:
+            #Checks to see what cost should be
             if node.state[zero_index - 4] >= 10:
                 cost = 2
             else:
                 cost = 1
+            # Create the new state
             newNodes.append(
                 State(
                     self.swapPositions(node.state.copy(), zero_index, zero_index - 4),
@@ -114,7 +118,7 @@ class BFS(Search):
                     node.stateid,
                     node.gn + cost,
                     self.goal_state.state,
-                    node.priority + 1,
+                    node.priority + 1, # Calculates priority by adding one to the level of the parent
                     self.search_type,
                 )
             )
@@ -171,6 +175,7 @@ class BFS(Search):
             )
             self.id_count += 1
 
+        # Check for duplicates and add to open list
         newNodes = self.checkForDuplicates(newNodes)
         for i in newNodes:
             self.open_list.insert(i)
@@ -188,10 +193,12 @@ class AStar(Search):
                 return ("After {} nodes popped from the open list, no solution has been found.".format(
                     max_open_list_pops
                 ),)
+            # Check for goal state being met and build output results if so
             if node.isGoalState(self.goal_state):
                 path = self.getPathTaken(node)
                 return self.returnResults(path)
 
+            # Otherwise expand the node
             self.expandNode(node)
             self.closed_list.append(node)
             self._closed_list_add_count += 1
@@ -203,7 +210,8 @@ class AStar(Search):
         left_no_moves = [4, 8, 12, 16]
         right_no_moves = [3, 7, 11, 15]
         newNodes = []
-        # TODO: Abstract this into another function
+        # Same process as bfs. Only difference is calculating priority, which is done in the state class
+        # for A* search.
         if zero_index - 4 >= 0:
             if node.state[zero_index - 4] >= 10:
                 cost = 2
@@ -292,6 +300,7 @@ class State:
         self.gn = gn
         self.hn = self.calculateHeuristic(goal_state, search_type)
         self.fn = self.hn + self.gn
+        # Different way to set priority based on whether doing BFS or A*
         if search_type != "bfs":
             self.priority = self.fn
         else:
@@ -318,6 +327,8 @@ class State:
     def calculateHeuristic(self, goal_state, kind="bfs"):
         heuristic = 0
         if kind == "h1":
+            # Check to see if the value in the current state is where it should be in the goal.
+            # Add 1 to the heuristic if it is not.
             for state_index in range(len(self.state)):
                 if self.state[state_index] != goal_state[state_index]:
                     heuristic += 1
@@ -334,12 +345,18 @@ class State:
         return hn
 
     def steps(self, state_location, goal_location):
+        # Get the difference in columns and add that to the difference in row value
+        # to see how far you need to move in order to get to the goal spot in the fewest
+        # moves possible.
         return abs(state_location // 4 - goal_location // 4) + abs(
             state_location % 4 - goal_location % 4
         )
 
 
 class PriorityQueue(object):
+    """
+    Priority queue to be used as the open list
+    """
     def __init__(self):
         self.queue = []
 
@@ -359,6 +376,7 @@ class PriorityQueue(object):
         self.queue.remove(node)
 
     def pop(self):
+        # Remove the lowest priority node from the list to expand next
         try:
             min = 0
             for i in range(len(self.queue)):
@@ -373,6 +391,10 @@ class PriorityQueue(object):
 
 
 class PriorityQueueIterator:
+    """
+    Iterator for allowing for an instance of the PriorityQueue class to be
+    iterated over
+    """
     def __init__(self, queue):
         self._queue = queue
         self._index = 0
@@ -396,7 +418,7 @@ def main(start_state, goal_state, search_type):
         a_star_h2 = AStar(goal_state, search_type)
         res = a_star_h2.aStar(start_state)
     else:
-        print("Usage: python3 'SearchType' '[StartState]' '[GoalState]'")
+        print("Usage: python3 CAJSourceCodeFile.py 'SearchType' '[StartState]' '[GoalState]'")
         print(
             "Search type = bfs, h1, or h2 where h1 is A* with count of tiles in the wrong place, and h2 is A* with Manhattan Values"
         )        
