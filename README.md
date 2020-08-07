@@ -1,6 +1,6 @@
 # AI_AStar_And_BFS_Search
 
-Implementation of BFS and A\* search for AI class using Python
+Implementation of BFS and A\* search using Python
 
 ## Heuristics for A\*
 
